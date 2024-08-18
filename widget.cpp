@@ -1,4 +1,5 @@
 #include "widget.h"
+#include "caculator.h"
 #include "./ui_widget.h"
 
 Widget::Widget(QWidget *parent)
@@ -147,6 +148,9 @@ void Widget::on_backSpaceButton_clicked()
 
 void Widget::on_equalButton_clicked()
 {
+    Caculator a(expression.toStdString());
 
+    expression=QString::fromStdString(a.evaluate());
+    ui->mainLineEdit->setText(expression);
 }
 
