@@ -150,7 +150,7 @@ void Widget::on_equalButton_clicked()
 {
     Caculator a(expression.toStdString());
 
-    expression=QString::fromStdString(a.evaluate());
+    expression=QString::fromStdString(a.mainEvaluate());
     ui->mainLineEdit->setText(expression);
 }
 
