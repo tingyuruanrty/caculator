@@ -148,9 +148,32 @@ void Widget::on_backSpaceButton_clicked()
 
 void Widget::on_equalButton_clicked()
 {
-    Caculator a(expression.toStdString());
+    std::string holder =expression.toStdString();
 
-    expression=QString::fromStdString(a.mainEvaluate());
+    int start=0;
+    int end=0;
+    for(int i = 0; i< holder.size();++i){
+        if(holder[i]=='('){
+            start = i;
+        }
+        if(holder[i]==')'){
+            end = i;
+            break;
+        }
+    }
+
+    Caculator resultOfParentheses(holder.substr(start+1,end-(start+1)));
+    std::string parentheses =resultOfParentheses.mainEvaluate();
+    holder.replace(start,end-start+1,parentheses);
+    Caculator result(holder);
+
+    expression=QString::fromStdString(result.mainEvaluate());
     ui->mainLineEdit->setText(expression);
+
+
+    //Caculator a(expression.toStdString());
+
+    //expression=QString::fromStdString(a.mainEvaluate());
+    //ui->mainLineEdit->setText(expression);
 }
 
