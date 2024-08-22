@@ -60,32 +60,78 @@ double Caculator::minusEvaluate(int indexOfMinus){
 
 
 void Caculator::firstEvaluate(){
-    int accumulator=0;
-    for(int i = 0; i<number.size()-1;++i){
+    int accmulator =0;
+    for(int i = 0;i<sign.size();++i){
         if(sign[i]=='*'){
-            number[i-accumulator]=std::to_string(timesEvaluate(i-accumulator));
-            for(int j = i+1;j<number.size()-1;++j){
+            number[i]=std::to_string(timesEvaluate(i));
+            for(int j=i+1;j<number.size()-1;++j){
                 number[j]=number[j+1];
+                sign[j-1]=sign[j];
             }
-            ++accumulator;
+            number.pop_back();
+            sign.pop_back();
+            ++accmulator;
+            i-=accmulator;
         }
     }
 }
 
 void Caculator::secondEvaluate(){
-
+    int accmulator =0;
+    for(int i = 0;i<sign.size();++i){
+        if(sign[i]=='/'){
+            number[i]=std::to_string(divideEvaluate(i));
+            for(int j=i+1;j<number.size()-1;++j){
+                number[j]=number[j+1];
+                sign[j-1]=sign[j];
+            }
+            number.pop_back();
+            sign.pop_back();
+            ++accmulator;
+            i-=accmulator;
+        }
+    }
 }
 
 void Caculator::thirdEvaluate(){
-
+    int accmulator =0;
+    for(int i = 0;i<sign.size();++i){
+        if(sign[i]=='+'){
+            number[i]=std::to_string(plusEvaluate(i));
+            for(int j=i+1;j<number.size()-1;++j){
+                number[j]=number[j+1];
+                sign[j-1]=sign[j];
+            }
+            number.pop_back();
+            sign.pop_back();
+            ++accmulator;
+            i-=accmulator;
+        }
+    }
 }
 
 void Caculator::fourthEvaluate(){
-
+    int accmulator =0;
+    for(int i = 0;i<sign.size();++i){
+        if(sign[i]=='-'){
+            number[i]=std::to_string(minusEvaluate(i));
+            for(int j=i+1;j<number.size()-1;++j){
+                number[j]=number[j+1];
+                sign[j-1]=sign[j];
+            }
+            number.pop_back();
+            sign.pop_back();
+            ++accmulator;
+            i-=accmulator;
+        }
+    }
 }
 
 std::string Caculator::mainEvaluate(){
     firstEvaluate();
+    secondEvaluate();
+    thirdEvaluate();
+    fourthEvaluate();
     return number[0];
 }
 
