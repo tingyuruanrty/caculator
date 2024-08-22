@@ -148,6 +148,7 @@ void Widget::on_backSpaceButton_clicked()
 
 void Widget::on_equalButton_clicked()
 {
+    if(expression.toStdString().find('(')!=std::string::npos){
     std::string holder =expression.toStdString();
 
     int start=0;
@@ -169,11 +170,12 @@ void Widget::on_equalButton_clicked()
 
     expression=QString::fromStdString(result.mainEvaluate());
     ui->mainLineEdit->setText(expression);
+    }else{
 
+    Caculator a(expression.toStdString());
 
-    //Caculator a(expression.toStdString());
-
-    //expression=QString::fromStdString(a.mainEvaluate());
-    //ui->mainLineEdit->setText(expression);
+    expression=QString::fromStdString(a.mainEvaluate());
+    ui->mainLineEdit->setText(expression);
+    }
 }
 
