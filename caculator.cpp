@@ -132,7 +132,7 @@ std::string Caculator::mainEvaluate(){
     secondEvaluate();
     thirdEvaluate();
     fourthEvaluate();
-    return number[0];
+    return number[0].erase(number[0].find_last_not_of('0')+1,std::string::npos);
 }
 
 Caculator::~Caculator()
