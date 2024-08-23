@@ -179,3 +179,10 @@ void Widget::on_equalButton_clicked()
     }
 }
 
+
+void Widget::on_pushButton_clicked()
+{
+    expression+=".";
+    ui->mainLineEdit->setText(expression);
+}
+

@@ -57,6 +57,8 @@ private slots:
 
     void on_equalButton_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::Widget *ui;
     QString expression;
