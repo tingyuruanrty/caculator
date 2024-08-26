@@ -2,20 +2,59 @@
 
 std::vector<char> Caculator::operatorVector(){
     std::vector<char> returnVector;
-    for(int i=0;i<expression.size();++i){
-        if(expression[i]=='+'){
+    //for(int i=0;i<expression.size();++i){
+    //    if(expression[i]=='+'){
+    //        returnVector.push_back(expression[i]);
+    //    }
+    //    if(expression[i]=='-'){
+    //        returnVector.push_back(expression[i]);
+    //    }
+    //    if(expression[i]=='*'){
+    //        returnVector.push_back(expression[i]);
+    //    }
+    //    if(expression[i]=='/'){
+    //        returnVector.push_back(expression[i]);
+    //    }
+    //}
+    //return returnVector;
+
+
+    int i =0;
+    while(i<expression.size()){
+        if(expression[i]=='+'||expression[i]=='-'||expression[i]=='*'||expression[i]=='/'){
             returnVector.push_back(expression[i]);
-        }
-        if(expression[i]=='-'){
-            returnVector.push_back(expression[i]);
-        }
-        if(expression[i]=='*'){
-            returnVector.push_back(expression[i]);
-        }
-        if(expression[i]=='/'){
-            returnVector.push_back(expression[i]);
+
+            //signPosition.push_back(i);
+
+            i+=2;
+        }else{
+            ++i;
         }
     }
+    return returnVector;
+}
+
+std::vector<int> Caculator::getSignPosition(){
+    std::vector<int> returnVector(numberOfSign);
+    int accmulator =0;
+    int index =0;
+    //for(int i =0;i<expression.size();++i){
+    //    if(expression[i]==sign[index]){
+    //        returnVector[index]=i;
+    //        ++index;
+    //        if(index ==sign.size()){
+    //
+    //        }
+    //    }
+    //}
+    while(index<sign.size()){
+        if(expression[accmulator]==sign[index]){
+            signPosition[index]=accmulator;
+            ++index;
+        }
+        ++accmulator;
+    }
+
     return returnVector;
 }
 
@@ -23,8 +62,9 @@ std::vector<std::string> Caculator::numberVector(){
     int index=0;
     std::vector<std::string> returnVector;
     returnVector.resize(numberOfNumber);
+
     for(int i=0;i<expression.size();++i){
-        if((expression[i]=='+')||(expression[i]=='-')||(expression[i]=='*')||(expression[i]=='/')){
+        if(i==signPosition[index]){
             ++index;
         }else{
             returnVector[index]+=expression[i];
@@ -45,6 +85,7 @@ Caculator::Caculator(std::string a)
     :expression(getExpression(a))
     ,sign(operatorVector())
     ,numberOfSign(sign.size())
+    ,signPosition(getSignPosition())
     ,numberOfNumber(numberOfSign+1)
     ,number(numberVector())
 {}

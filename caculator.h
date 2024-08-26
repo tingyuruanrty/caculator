@@ -9,12 +9,14 @@ class Caculator
     std::string expression;
     std::vector<char> sign;
     int numberOfSign;
+    std::vector<int> signPosition;
     int numberOfNumber;
     std::vector<std::string> number;
 
 
     std::vector<char> operatorVector();
     std::vector<std::string> numberVector();
+    std::vector<int> getSignPosition();
     std::string getExpression(std::string a);
 
 
