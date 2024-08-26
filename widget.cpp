@@ -149,46 +149,39 @@ void Widget::on_backSpaceButton_clicked()
 void Widget::on_equalButton_clicked()
 {
     std::string answerHolder;
-    if(expression.toStdString().find('(')!=std::string::npos){
-    std::string holder =expression.toStdString();
+    std::string stringExpression=expression.toStdString();
 
+    if(stringExpression.find('(')!=std::string::npos)
+    {
 
-    int start=0;
-    int end=0;
-    for(int i = 0; i< holder.size();++i){
-        if(holder[i]=='('){
-            start = i;
+        int start=0;
+        int end=0;
+        for(int i = 0; i< stringExpression.size();++i){
+            if(stringExpression[i]=='('){
+                start = i;
+            }
+            if(stringExpression[i]==')'){
+                end = i;
+                break;
+            }
         }
-        if(holder[i]==')'){
-            end = i;
-            break;
-        }
-    }
 
-    Caculator resultOfParentheses(holder.substr(start+1,end-(start+1)));
+    Caculator resultOfParentheses(stringExpression.substr(start+1,end-(start+1)));
     std::string parentheses =resultOfParentheses.mainEvaluate();
-    holder.replace(start,end-start+1,parentheses);
-    Caculator result(holder);
+    stringExpression.replace(start,end-start+1,parentheses);
 
+    }
+
+    Caculator result(stringExpression);
     answerHolder=result.mainEvaluate();
+
     if(answerHolder.back()=='.'){
         answerHolder.pop_back();
     }
 
     expression=QString::fromStdString(answerHolder);
     ui->mainLineEdit->setText(expression);
-    }else{
 
-    Caculator a(expression.toStdString());
-
-    answerHolder=a.mainEvaluate();
-    if(answerHolder.back()=='.'){
-        answerHolder.pop_back();
-    }
-
-    expression=QString::fromStdString(answerHolder);
-    ui->mainLineEdit->setText(expression);
-    }
 }
 
 
