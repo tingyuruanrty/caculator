@@ -1,7 +1,12 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
+#include <QString>
 #include <QWidget>
+#include <QApplication>
+#include <QPushButton>
+// Any other necessary Qt includes
+
 
 
 QT_BEGIN_NAMESPACE

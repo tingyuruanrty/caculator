@@ -23,7 +23,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(caculator
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        caculator.h caculator.cpp
     )
+
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET caculator APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
@@ -67,4 +69,50 @@ install(TARGETS caculator
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(caculator)
+endif()
+
+
+
+
+
+include(CPack)
+
+set(CPACK_PACKAGE_NAME "Calculator")
+set(CPACK_PACKAGE_VERSION "0.1")
+set(CPACK_PACKAGE_CONTACT "tingyuruanrty@gmail.com")
+
+# Optionally set more information about the package
+# set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A simple calculator application")
+# set(CPACK_PACKAGE_VENDOR "Your Name")
+# set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
+# set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+
+# Specify the installation directory for the package
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "Calculator ${CPACK_PACKAGE_VERSION}")
+
+# Define the package generators (e.g., ZIP, TGZ, NSIS, etc.)
+set(CPACK_GENERATOR "ZIP;TGZ;NSIS")  # Adjust as needed
+
+# If you're targeting Windows, add NSIS configuration (optional)
+if(WIN32)
+    set(CPACK_NSIS_DISPLAY_NAME "Calculator Installer")
+    set(CPACK_NSIS_HELP_LINK "http://www.example.com")
+    set(CPACK_NSIS_URL_INFO_ABOUT "http://www.example.com/about")
+    set(CPACK_NSIS_CONTACT "youremail@example.com")
+    set(CPACK_NSIS_MODIFY_PATH ON)  # Add the installation directory to the PATH environment variable
+endif()
+
+# Optionally, add macOS-specific settings (optional)
+if(APPLE)
+    set(CPACK_BUNDLE_NAME "Calculator")
+    set(CPACK_BUNDLE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/Resources/Icon.icns")
+    set(CPACK_BUNDLE_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/Info.plist")
+    set(CPACK_DMG_VOLUME_NAME "Calculator Installer")
+    set(CPACK_DMG_BACKGROUND_IMAGE "${CMAKE_CURRENT_SOURCE_DIR}/Resources/background.png")
+endif()
+
+# Optionally, add Linux-specific settings (optional)
+if(UNIX AND NOT APPLE)
+    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Your Name")
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS "qt5-default, libqt5widgets5")
 endif()
