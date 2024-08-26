@@ -32,8 +32,6 @@ public:
 
     void firstEvaluate();
     void secondEvaluate();
-    void thirdEvaluate();
-    void fourthEvaluate();
 
     std::string mainEvaluate();
 

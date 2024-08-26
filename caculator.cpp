@@ -2,30 +2,10 @@
 
 std::vector<char> Caculator::operatorVector(){
     std::vector<char> returnVector;
-    //for(int i=0;i<expression.size();++i){
-    //    if(expression[i]=='+'){
-    //        returnVector.push_back(expression[i]);
-    //    }
-    //    if(expression[i]=='-'){
-    //        returnVector.push_back(expression[i]);
-    //    }
-    //    if(expression[i]=='*'){
-    //        returnVector.push_back(expression[i]);
-    //    }
-    //    if(expression[i]=='/'){
-    //        returnVector.push_back(expression[i]);
-    //    }
-    //}
-    //return returnVector;
-
-
     int i =0;
     while(i<expression.size()){
         if(expression[i]=='+'||expression[i]=='-'||expression[i]=='*'||expression[i]=='/'){
             returnVector.push_back(expression[i]);
-
-            //signPosition.push_back(i);
-
             i+=2;
         }else{
             ++i;
@@ -38,15 +18,6 @@ std::vector<int> Caculator::getSignPosition(){
     std::vector<int> returnVector(numberOfSign);
     int accmulator =0;
     int index =0;
-    //for(int i =0;i<expression.size();++i){
-    //    if(expression[i]==sign[index]){
-    //        returnVector[index]=i;
-    //        ++index;
-    //        if(index ==sign.size()){
-    //
-    //        }
-    //    }
-    //}
     while(index<sign.size()){
         if(expression[accmulator]==sign[index]){
             signPosition[index]=accmulator;
@@ -111,8 +82,21 @@ double Caculator::minusEvaluate(int indexOfMinus){
 void Caculator::firstEvaluate(){
     int accmulator =0;
     for(int i = 0;i<sign.size();++i){
+
         if(sign[i]=='*'){
             number[i]=std::to_string(timesEvaluate(i));
+            for(int j=i+1;j<number.size()-1;++j){
+                number[j]=number[j+1];
+                sign[j-1]=sign[j];
+            }
+            number.pop_back();
+            sign.pop_back();
+            ++accmulator;
+            i-=accmulator;
+        }
+
+        if(sign[i]=='/'){
+            number[i]=std::to_string(divideEvaluate(i));
             for(int j=i+1;j<number.size()-1;++j){
                 number[j]=number[j+1];
                 sign[j-1]=sign[j];
@@ -128,23 +112,6 @@ void Caculator::firstEvaluate(){
 void Caculator::secondEvaluate(){
     int accmulator =0;
     for(int i = 0;i<sign.size();++i){
-        if(sign[i]=='/'){
-            number[i]=std::to_string(divideEvaluate(i));
-            for(int j=i+1;j<number.size()-1;++j){
-                number[j]=number[j+1];
-                sign[j-1]=sign[j];
-            }
-            number.pop_back();
-            sign.pop_back();
-            ++accmulator;
-            i-=accmulator;
-        }
-    }
-}
-
-void Caculator::thirdEvaluate(){
-    int accmulator =0;
-    for(int i = 0;i<sign.size();++i){
         if(sign[i]=='+'){
             number[i]=std::to_string(plusEvaluate(i));
             for(int j=i+1;j<number.size()-1;++j){
@@ -156,12 +123,6 @@ void Caculator::thirdEvaluate(){
             ++accmulator;
             i-=accmulator;
         }
-    }
-}
-
-void Caculator::fourthEvaluate(){
-    int accmulator =0;
-    for(int i = 0;i<sign.size();++i){
         if(sign[i]=='-'){
             number[i]=std::to_string(minusEvaluate(i));
             for(int j=i+1;j<number.size()-1;++j){
@@ -179,8 +140,6 @@ void Caculator::fourthEvaluate(){
 std::string Caculator::mainEvaluate(){
     firstEvaluate();
     secondEvaluate();
-    thirdEvaluate();
-    fourthEvaluate();
     return number[0].erase(number[0].find_last_not_of('0')+1,std::string::npos);
 }
 
