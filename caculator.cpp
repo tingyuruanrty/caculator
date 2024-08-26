@@ -33,8 +33,16 @@ std::vector<std::string> Caculator::numberVector(){
     return returnVector;
 }
 
+std::string Caculator::getExpression(std::string a){
+    if(a[0]=='-'){
+        return a="0"+a;
+    }else{
+        return a;
+    }
+}
+
 Caculator::Caculator(std::string a)
-    :expression(a)
+    :expression(getExpression(a))
     ,sign(operatorVector())
     ,numberOfSign(sign.size())
     ,numberOfNumber(numberOfSign+1)

@@ -15,6 +15,7 @@ class Caculator
 
     std::vector<char> operatorVector();
     std::vector<std::string> numberVector();
+    std::string getExpression(std::string a);
 
 
 public:
