@@ -1,49 +1,5 @@
 #include "caculator.h"
 
-std::vector<char> Caculator::operatorVector(){
-    std::vector<char> returnVector;
-    int i =0;
-    while(i<expression.size()){
-        if(expression[i]=='+'||expression[i]=='-'||expression[i]=='*'||expression[i]=='/'){
-            returnVector.push_back(expression[i]);
-            i+=2;
-        }else{
-            ++i;
-        }
-    }
-    return returnVector;
-}
-
-std::vector<int> Caculator::getSignPosition(){
-    std::vector<int> returnVector(numberOfSign);
-    int accmulator =0;
-    int index =0;
-    while(index<sign.size()){
-        if(expression[accmulator]==sign[index]){
-            signPosition[index]=accmulator;
-            ++index;
-        }
-        ++accmulator;
-    }
-
-    return returnVector;
-}
-
-std::vector<std::string> Caculator::numberVector(){
-    int index=0;
-    std::vector<std::string> returnVector;
-    returnVector.resize(numberOfNumber);
-
-    for(int i=0;i<expression.size();++i){
-        if(i==signPosition[index]){
-            ++index;
-        }else{
-            returnVector[index]+=expression[i];
-        }
-    }
-    return returnVector;
-}
-
 std::string Caculator::getExpression(std::string a){
     if(a[0]=='-'){
         return a="0"+a;
@@ -54,12 +10,21 @@ std::string Caculator::getExpression(std::string a){
 
 Caculator::Caculator(std::string a)
     :expression(getExpression(a))
-    ,sign(operatorVector())
-    ,numberOfSign(sign.size())
-    ,signPosition(getSignPosition())
-    ,numberOfNumber(numberOfSign+1)
-    ,number(numberVector())
-{}
+{
+    std::string currentNumber;
+    for(int i = 0;i<expression.size();++i){
+        if(expression[i]=='*'||expression[i]=='/'||expression[i]=='+'||expression[i]=='-'){
+            sign.push_back(expression[i]);
+            signPosition.push_back(i);
+            number.push_back(currentNumber);
+            currentNumber=expression[i+1];
+            i=i+1;
+        }else{
+            currentNumber+=expression[i];
+        }
+    }
+    number.push_back(currentNumber);
+}
 
 double Caculator::timesEvaluate(int indexOfTimes){
     return std::stod(number[indexOfTimes]) * std::stod(number[indexOfTimes+1]);
@@ -76,8 +41,6 @@ double Caculator::plusEvaluate(int indexOfPlus){
 double Caculator::minusEvaluate(int indexOfMinus){
     return std::stod(number[indexOfMinus]) - std::stod(number[indexOfMinus+1]);
 }
-
-
 
 void Caculator::firstEvaluate(){
     int accmulator =0;
