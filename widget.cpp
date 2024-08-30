@@ -13,6 +13,8 @@ Widget::Widget(QWidget *parent)
 
     QIcon a("C:\\Users\\tingy\\Desktop\\c++\\qtprojects\\caculator\\arrow.png");
     ui->backSpaceButton->setIcon(a);
+
+    connect(ui->mainLineEdit,&QLineEdit::returnPressed,this,&Widget::on_equalButton_clicked);
 }
 
 Widget::~Widget()
@@ -148,6 +150,7 @@ void Widget::on_backSpaceButton_clicked()
 
 void Widget::on_equalButton_clicked()
 {
+    expression=ui->mainLineEdit->text();
     std::string answerHolder;
     std::string stringExpression=expression.toStdString();
 
