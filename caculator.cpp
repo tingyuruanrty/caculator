@@ -103,7 +103,11 @@ void Caculator::secondEvaluate(){
 std::string Caculator::mainEvaluate(){
     firstEvaluate();
     secondEvaluate();
-    return number[0].erase(number[0].find_last_not_of('0')+1,std::string::npos);
+    if(number[0]!="0"){
+        return number[0].erase(number[0].find_last_not_of('0')+1,std::string::npos);
+    }else{
+        return number[0];
+    }
 }
 
 Caculator::~Caculator()
