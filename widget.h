@@ -5,7 +5,7 @@
 #include <QWidget>
 #include <QApplication>
 #include <QPushButton>
-// Any other necessary Qt includes
+#include <QKeyEvent>
 
 
 
@@ -22,6 +22,7 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
+    void keyPressEvent(QKeyEvent* k);
 
 private slots:
     void on_oneButton_clicked();
@@ -62,7 +63,7 @@ private slots:
 
     void on_equalButton_clicked();
 
-    void on_pushButton_clicked();
+    void on_periodButton_clicked();
 
 private:
     Ui::Widget *ui;

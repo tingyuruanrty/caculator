@@ -188,9 +188,74 @@ void Widget::on_equalButton_clicked()
 }
 
 
-void Widget::on_pushButton_clicked()
+void Widget::on_periodButton_clicked()
 {
     expression+=".";
     ui->mainLineEdit->setText(expression);
 }
 
+void Widget::keyPressEvent(QKeyEvent* k){
+    if(k->key()==Qt::Key_0){
+        on_zeroButton_clicked();
+    }
+    if(k->key()==Qt::Key_1){
+        on_oneButton_clicked();
+    }
+    if(k->key()==Qt::Key_2){
+        on_twoButton_clicked();
+    }
+    if(k->key()==Qt::Key_3){
+        on_threeButton_clicked();
+    }
+    if(k->key()==Qt::Key_4){
+        on_fourButton_clicked();
+    }
+    if(k->key()==Qt::Key_5){
+        on_fiveButton_clicked();
+    }
+    if(k->key()==Qt::Key_6){
+        on_sixButton_clicked();
+    }
+    if(k->key()==Qt::Key_7){
+        on_sevenButton_clicked();
+    }
+    if(k->key()==Qt::Key_8){
+        on_eightButton_clicked();
+    }
+    if(k->key()==Qt::Key_9){
+        on_nineButton_clicked();
+    }
+    if(k->key()==Qt::Key_Period){
+        on_periodButton_clicked();
+    }
+    if(k->key()==Qt::Key_ParenLeft){
+        on_leftParentheseButton_clicked();
+    }
+    if(k->key()==Qt::Key_ParenRight){
+        on_rightParentheseButton_clicked();
+    }
+    if(k->key()==Qt::Key_Plus){
+        on_plusButton_clicked();
+    }
+    if(k->key()==Qt::Key_Minus){
+        on_minusButton_clicked();
+    }
+    if(k->key()==Qt::Key_Asterisk){
+        on_timeButton_clicked();
+    }
+    if(k->key()==Qt::Key_Slash){
+        on_divideButton_clicked();
+    }
+    if(k->key()==Qt::Key_Enter){
+        on_equalButton_clicked();
+    }
+    if(k->key()==Qt::Key_Equal){
+        on_equalButton_clicked();
+    }
+    if(k->key()==Qt::Key_C){
+        on_clearButton_clicked();
+    }
+    if(k->key()==Qt::Key_Backspace){
+        on_backSpaceButton_clicked();
+    }
+}
