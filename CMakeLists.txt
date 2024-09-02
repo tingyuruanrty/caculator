@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(caculator VERSION 0.1 LANGUAGES CXX)
+project(caculator VERSION 0.2 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -78,7 +78,7 @@ endif()
 include(CPack)
 
 set(CPACK_PACKAGE_NAME "Calculator")
-set(CPACK_PACKAGE_VERSION "0.1")
+set(CPACK_PACKAGE_VERSION "0.2")
 set(CPACK_PACKAGE_CONTACT "tingyuruanrty@gmail.com")
 
 # Optionally set more information about the package
