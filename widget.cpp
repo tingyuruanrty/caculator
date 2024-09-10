@@ -11,7 +11,7 @@ Widget::Widget(QWidget *parent)
     QFont f("SimSun",20);
     ui->mainLineEdit->setFont(f);
 
-    QIcon a("C:\\Users\\tingy\\Desktop\\c++\\qtprojects\\caculator\\arrow.png");
+    QIcon a("C:\\Users\\tingy\\Desktop\\c++\\qtprojects\\caculator\\build\\Desktop_Qt_6_7_2_MinGW_64_bit-Debug\\arrow.png");
     ui->backSpaceButton->setIcon(a);
 
     connect(ui->mainLineEdit,&QLineEdit::returnPressed,this,&Widget::on_equalButton_clicked);
@@ -154,7 +154,7 @@ void Widget::on_equalButton_clicked()
     std::string answerHolder;
     std::string stringExpression=expression.toStdString();
 
-    if(stringExpression.find('(')!=std::string::npos)
+    while(stringExpression.find('(')!=std::string::npos)
     {
 
         int start=0;
