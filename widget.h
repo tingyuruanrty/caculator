@@ -6,6 +6,9 @@
 #include <QApplication>
 #include <QPushButton>
 #include <QKeyEvent>
+#include <QIcon>
+#include <QCoreApplication>
+#include <QDir>
 
 
 
