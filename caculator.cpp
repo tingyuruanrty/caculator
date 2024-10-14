@@ -47,7 +47,11 @@ void Caculator::firstEvaluate(){
     for(int i = 0;i<sign.size();++i){
 
         if(sign[i]=='*'){
-            number[i]=std::to_string(timesEvaluate(i));
+            //to_string would only keep six decimal point
+            //number[i]=std::to_string(timesEvaluate(i));
+            std::ostringstream oss;
+            oss<<std::fixed<<std::setprecision(8)<<timesEvaluate(i);
+            number[i]=oss.str();
             for(int j=i+1;j<number.size()-1;++j){
                 number[j]=number[j+1];
                 sign[j-1]=sign[j];
@@ -59,7 +63,10 @@ void Caculator::firstEvaluate(){
         }
 
         if(sign[i]=='/'){
-            number[i]=std::to_string(divideEvaluate(i));
+            //number[i]=std::to_string(divideEvaluate(i));
+            std::ostringstream oss;
+            oss<<std::fixed<<std::setprecision(8)<<divideEvaluate(i);
+            number[i]=oss.str();
             for(int j=i+1;j<number.size()-1;++j){
                 number[j]=number[j+1];
                 sign[j-1]=sign[j];
