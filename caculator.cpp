@@ -1,4 +1,6 @@
 #include "caculator.h"
+// necessary for std::stod
+#include <sstream>
 
 std::string Caculator::getExpression(std::string a){
     if(a[0]=='-'){
